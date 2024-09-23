@@ -1,0 +1,19 @@
+{
+  "name": "hackathon-registration",
+  "version": "1.0.0",
+  "description": "Hackathon Registration Management Website",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "nodemon": "^3.1.6"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

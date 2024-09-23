@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered People - Hackathon Registration</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+<body>
+    <%- include('partials/header') %>
+
+    <main>
+        <div class='animation'>
+            <div class='item'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item -type2'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item -type2'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item -type2'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item -type2'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='center'>
+                <div class='circle'></div>
+                <div class='circle'></div>
+                <div class='circle'></div>
+            </div>
+        </div>
+        <section class="registered-people">
+            <h1>Registered Participants</h1>
+            
+            <!-- Add this new div for the progress bar -->
+            <div class="progress-container">
+                <svg class="progress-ring" width="120" height="120">
+                    <circle class="progress-ring__circle" stroke="#54ccfe" stroke-width="8" fill="transparent" r="52" cx="60" cy="60"/>
+                </svg>
+                <div class="progress-text">
+                    <span id="participantCount">0</span>
+                    <span>Participants</span>
+                </div>
+            </div>
+
+            <div class="table-controls">
+                <input type="text" id="searchInput" placeholder="Search participants...">
+                <select id="sortSelect">
+                    <option value="name">Sort by Name</option>
+                    <option value="roll">Sort by Roll Number</option>
+                    <option value="payment">Sort by Payment Status</option>
+                </select>
+            </div>
+            <div class="table-container">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>Serial No.</th>
+                            <th>Team Name</th>
+                            <th>Leader Name</th>
+                            <!-- <th>phone Number</th> -->
+                            <th>Payment Status</th>
+                            <th>Team Size</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <% if (locals.tableData) { %>
+                            <% for (let data = 0; data < tableData.length; data++) { %>
+                                <tr>
+                                    <td><%= data + 1 %></td>
+                                    <td><%= tableData[data]['Team Name'] %></td>
+                                    <td><%= tableData[data]['Leader_name'] %></td>
+                                    <!-- <td><%= tableData[data]['Phone number'] %></td> -->
+                                    <td class="paid">Paid</td>
+                                    <td><%= tableData[data]['Team size'] %></td>
+                                </tr>
+                            <% } %>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="/js/main.js"></script>
+    <script>
+        // Add this script to calculate and animate the progress bar
+        document.addEventListener('DOMContentLoaded', function() {
+            const circle = document.querySelector('.progress-ring__circle');
+            const radius = circle.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            const participantCountElement = document.getElementById('participantCount');
+
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            circle.style.strokeDashoffset = circumference;
+
+            let totalParticipants = 0;
+            '<% if (locals.tableData) { %>'
+                '<% tableData.forEach(data => { %>'
+                    totalParticipants +=  parseInt("<%= data['Team size'] %>") ;
+                '<% }); %>'
+            '<% } %>'
+
+            function setProgress(percent) {
+                const offset = circumference - percent / 100 * circumference;
+                circle.style.strokeDashoffset = offset;
+            }
+
+            function animateCount(target, duration) {
+                let start = 0;
+                const increment = target / (duration / 16);
+                const timer = setInterval(() => {
+                    start += increment;
+                    participantCountElement.textContent = Math.floor(start);
+                    if (start >= target) {
+                        clearInterval(timer);
+                        participantCountElement.textContent = target;
+                    }
+                }, 16);
+            }
+
+            setTimeout(() => {
+                circle.style.transition = 'stroke-dashoffset 5s ease-in-out';
+                setProgress(100);
+            }, 100);
+
+            // Animate count separately (faster)
+            setTimeout(() => {
+                animateCount(totalParticipants, 2000); // 2 seconds for count animation
+            }, 100);
+        });
+    </script>
+</body>
+</html>

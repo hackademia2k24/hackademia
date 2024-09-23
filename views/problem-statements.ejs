@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statements - Hackathon Registration</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <main>
+        <div class='animation'>
+            <div class='item'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item -type2'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item -type2'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item -type2'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='item -type2'>
+                <div class='line'></div>
+                <div class='dot'></div>
+                <div class='circle'></div>
+            </div>
+            <div class='center'>
+                <div class='circle'></div>
+                <div class='circle'></div>
+                <div class='circle'></div>
+            </div>
+        </div>
+        <section class="problem-statements">
+            <h1>Problem Statements</h1>
+            <div class="table-container">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>Serial No.</th>
+                            <th>Domain</th>
+                            <th>Description</th>
+                            <!-- <th>Link</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% const problems = [
+                        { "name": "Develop interconnected devices to improve automation, data collection, and decision-making in homes, cities, and industries.", "domain": "Internet of Things (IoT) and Smart Devices" },
+                        { "name": "Create applications and services that leverage high-speed, low-latency networks for enhanced connectivity and new use cases.", "domain": "5G and Beyond Communication Technologies" },
+                        { "name": "Design robots and automated systems to improve efficiency in manufacturing, healthcare, and service industries.", "domain": "Robotics and Automation" },
+                        { "name": "Develop quantum algorithms and applications that can solve complex problems beyond the reach of classical computers.", "domain": "Quantum Computing" },
+                        { "name": "Create systems for safe and efficient autonomous navigation in various environments, from city streets to airspace.", "domain": "Autonomous Vehicles and Drones" },
+                        { "name": "Develop tools for gene editing, personalized medicine, and sustainable bio-based products.", "domain": "Biotechnology and Genetic Engineering" },
+                        { "name": "Create integrated systems for efficient resource management, improved public services, and enhanced quality of life in urban areas.", "domain": "Smart Cities and Urban Planning" },
+                        { "name": "Develop more efficient and affordable clean energy technologies to accelerate the transition from fossil fuels.", "domain": "Renewable Energy Systems" },
+                        { "name": "Create innovative solutions for space travel, satellite communications, and extraterrestrial resource utilization.", "domain": "Space Technology and Exploration" },
+                        { "name": "Develop more intuitive and accessible interfaces for digital technologies, including those for differently-abled users.", "domain": "Human-Computer Interaction (HCI)" },
+                        { "name": "Create virtual replicas of physical assets, processes, or systems to improve monitoring, prediction, and optimization.", "domain": "Digital Twin Technology" },
+                        { "name": "Develop new materials, processes, and applications for additive manufacturing across industries.", "domain": "Additive Manufacturing and 3D Printing" },
+                        { "name": "Create technologies and systems for efficient resource recycling, upcycling, and waste reduction.", "domain": "Circular Economy and Waste Management" },
+                        { "name": "Develop technologies for optimizing crop yields, reducing resource use, and creating sustainable food production systems.", "domain": "Precision Agriculture and Food Tech" },
+                        {"domain": "Open Innovation" ,"name": "collaboratively generate innovative solutions to develop any project. That tackles any real world problems."}
+                    ]
+                     %>
+                        <% problems.forEach((problem, index) => { %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><%= problem.domain %></td>
+                                <td><%= problem.name %></td>
+                                <!-- <td><a href="/problem/<%= index + 1 %>" class="problem-link">View Details</a></td> -->
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
